@@ -55,8 +55,8 @@ https://github.com/michalochman/react-pixi-fiber/issues/145#issuecomment-5315492
                     game={game}
                     worldId={worldId}
                     engineId={engineId}
-                    width={width}
-                    height={height}
+                    width={width ?? 0}
+                    height={height ?? 0}
                     historicalTime={historicalTime}
                     setSelectedElement={setSelectedElement}
                   />

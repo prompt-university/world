@@ -22,6 +22,7 @@ export default PixiComponent('Viewport', {
   create(props: ViewportProps) {
     const { app, children, viewportRef, ...viewportProps } = props;
     const viewport = new Viewport({
+      // @ts-expect-error events property exists but isn't in IViewportOptions type
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       events: app.renderer.events,
       passiveWheel: false,

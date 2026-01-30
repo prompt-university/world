@@ -22,7 +22,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": ["node", "react", "react-dom", "jest"]
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.js", "postcss.config.js"],
   "exclude": ["node_modules"]
