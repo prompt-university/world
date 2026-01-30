@@ -13,7 +13,7 @@ Fly.io makes it easy to deploy containers to the cloud.
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/ai-town/ai-town.git
+git clone https://github.com/prompt-university/world.git
 ```
 
 2. Deploy a Convex backend
@@ -65,7 +65,7 @@ If you want to self-host the Convex backend on Fly.io, you can follow these step
    ```
 
    Note the Fly URL of the deployed backend. Like
-   `https://ai-town-convex-backend-1234567890.fly.dev`.
+   `https://prompt-university-convex-backend-1234567890.fly.dev`.
 
    Note: you can't scale the backends to more than 1 machine. It is stateful.
 
@@ -89,8 +89,8 @@ If you want to self-host the Convex backend on Fly.io, you can follow these step
    fly ssh console --command "./generate_admin_key.sh"
    ```
 
-   Unless you edited the app's `fly.toml`, the name is `ai-town-convex-backend`. If you specified a
-   different name, replace `ai-town-convex-backend` with it.
+   Unless you edited the app's `fly.toml`, the name is `prompt-university-convex-backend`. If you specified a
+   different name, replace `prompt-university-convex-backend` with it.
 
    This admin key will be used to authorize the CLI and access the dashboard.
 

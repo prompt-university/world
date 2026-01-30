@@ -8,11 +8,6 @@
  * @module
  */
 
-import type {
-  ApiFromModules,
-  FilterApi,
-  FunctionReference,
-} from "convex/server";
 import type * as agent_conversation from "../agent/conversation.js";
 import type * as agent_embeddingsCache from "../agent/embeddingsCache.js";
 import type * as agent_memory from "../agent/memory.js";
@@ -34,6 +29,9 @@ import type * as aiTown_player from "../aiTown/player.js";
 import type * as aiTown_playerDescription from "../aiTown/playerDescription.js";
 import type * as aiTown_world from "../aiTown/world.js";
 import type * as aiTown_worldMap from "../aiTown/worldMap.js";
+import type * as clawdbot_bridge from "../clawdbot/bridge.js";
+import type * as clawdbot_http from "../clawdbot/http.js";
+import type * as clawdbot_index from "../clawdbot/index.js";
 import type * as constants from "../constants.js";
 import type * as crons from "../crons.js";
 import type * as engine_abstractGame from "../engine/abstractGame.js";
@@ -57,14 +55,12 @@ import type * as util_types from "../util/types.js";
 import type * as util_xxhash from "../util/xxhash.js";
 import type * as world from "../world.js";
 
-/**
- * A utility for referencing Convex functions in your app's API.
- *
- * Usage:
- * ```js
- * const myFunctionReference = api.myModule.myFunction;
- * ```
- */
+import type {
+  ApiFromModules,
+  FilterApi,
+  FunctionReference,
+} from "convex/server";
+
 declare const fullApi: ApiFromModules<{
   "agent/conversation": typeof agent_conversation;
   "agent/embeddingsCache": typeof agent_embeddingsCache;
@@ -87,6 +83,9 @@ declare const fullApi: ApiFromModules<{
   "aiTown/playerDescription": typeof aiTown_playerDescription;
   "aiTown/world": typeof aiTown_world;
   "aiTown/worldMap": typeof aiTown_worldMap;
+  "clawdbot/bridge": typeof clawdbot_bridge;
+  "clawdbot/http": typeof clawdbot_http;
+  "clawdbot/index": typeof clawdbot_index;
   constants: typeof constants;
   crons: typeof crons;
   "engine/abstractGame": typeof engine_abstractGame;
@@ -110,11 +109,31 @@ declare const fullApi: ApiFromModules<{
   "util/xxhash": typeof util_xxhash;
   world: typeof world;
 }>;
+
+/**
+ * A utility for referencing Convex functions in your app's public API.
+ *
+ * Usage:
+ * ```js
+ * const myFunctionReference = api.myModule.myFunction;
+ * ```
+ */
 export declare const api: FilterApi<
   typeof fullApi,
   FunctionReference<any, "public">
 >;
+
+/**
+ * A utility for referencing Convex functions in your app's internal API.
+ *
+ * Usage:
+ * ```js
+ * const myFunctionReference = internal.myModule.myFunction;
+ * ```
+ */
 export declare const internal: FilterApi<
   typeof fullApi,
   FunctionReference<any, "internal">
 >;
+
+export declare const components: {};

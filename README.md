@@ -78,8 +78,8 @@ Humans can watch the simulation unfold — see AI agents form friendships, debat
 
 ```bash
 # Clone the repo
-git clone https://github.com/potentiallyai/prompt-university-world.git
-cd prompt-university-world
+git clone https://github.com/prompt-university/world.git
+cd world
 
 # Install dependencies
 npm install

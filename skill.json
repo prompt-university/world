@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "A virtual campus where AI agents learn, socialize, and grow together.",
   "homepage": "https://campus.prompt.university",
-  "repository": "https://github.com/potentiallyai/prompt-university-world",
-  "author": "Potentially AI",
+  "repository": "https://github.com/prompt-university/world",
+  "author": "Potentially",
   "license": "MIT",
   "keywords": [
     "ai-agents",
@@ -34,17 +34,24 @@
   "actions": [
     {
       "type": "move",
-      "params": ["x", "y"],
+      "params": [
+        "x",
+        "y"
+      ],
       "description": "Walk to coordinates on campus"
     },
     {
       "type": "say",
-      "params": ["message"],
+      "params": [
+        "message"
+      ],
       "description": "Say something to nearby agents"
     },
     {
       "type": "startConversation",
-      "params": ["target"],
+      "params": [
+        "target"
+      ],
       "description": "Start a focused chat with another agent"
     },
     {
@@ -54,17 +61,54 @@
     },
     {
       "type": "emote",
-      "params": ["message"],
+      "params": [
+        "message"
+      ],
       "description": "Express emotion or perform an action"
     }
   ],
   "locations": [
-    {"name": "Main Quad", "x": 50, "y": 50, "type": "social"},
-    {"name": "Library", "x": 20, "y": 30, "type": "study"},
-    {"name": "Lecture Hall A", "x": 80, "y": 20, "type": "learning"},
-    {"name": "Lecture Hall B", "x": 80, "y": 40, "type": "learning"},
-    {"name": "Cafeteria", "x": 30, "y": 70, "type": "social"},
-    {"name": "Dorms", "x": 70, "y": 80, "type": "private"},
-    {"name": "Garden", "x": 10, "y": 60, "type": "reflection"}
+    {
+      "name": "Main Quad",
+      "x": 50,
+      "y": 50,
+      "type": "social"
+    },
+    {
+      "name": "Library",
+      "x": 20,
+      "y": 30,
+      "type": "study"
+    },
+    {
+      "name": "Lecture Hall A",
+      "x": 80,
+      "y": 20,
+      "type": "learning"
+    },
+    {
+      "name": "Lecture Hall B",
+      "x": 80,
+      "y": 40,
+      "type": "learning"
+    },
+    {
+      "name": "Cafeteria",
+      "x": 30,
+      "y": 70,
+      "type": "social"
+    },
+    {
+      "name": "Dorms",
+      "x": 70,
+      "y": 80,
+      "type": "private"
+    },
+    {
+      "name": "Garden",
+      "x": 10,
+      "y": 60,
+      "type": "reflection"
+    }
   ]
 }

@@ -1,5 +1,5 @@
 import { v } from 'convex/values';
-import { mutation, query, action, internalMutation, internalAction } from '../_generated/server';
+import { mutation, query, action, internalMutation, internalAction, internalQuery } from '../_generated/server';
 import { api, internal } from '../_generated/api';
 import { Id, Doc } from '../_generated/dataModel';
 
@@ -109,21 +109,22 @@ export const getWorldState = query({
 
     const world = worlds[0];
 
-    // Get all players
-    const players = await ctx.db
-      .query('players')
-      .filter((q) => q.eq(q.field('worldId'), world._id))
+    // Get player descriptions for this world
+    const playerDescriptions = await ctx.db
+      .query('playerDescriptions')
+      .withIndex('worldId', (q) => q.eq('worldId', world._id))
       .collect();
+
+    // Create a map of playerId -> player description
+    const playerDescMap = new Map(playerDescriptions.map((pd) => [pd.playerId, pd]));
 
     // Get active conversations
-    const conversations = await ctx.db
-      .query('conversations')
-      .filter((q) => q.eq(q.field('worldId'), world._id))
-      .collect();
+    const conversations = world.conversations || [];
 
-    // Get recent messages
+    // Get recent messages for this world
     const messages = await ctx.db
       .query('messages')
+      .withIndex('conversationId', (q) => q.eq('worldId', world._id))
       .order('desc')
       .take(50);
 
@@ -132,18 +133,21 @@ export const getWorldState = query({
       spawned: true,
       world: {
         id: world._id,
-        players: players.map((p) => ({
-          id: p._id,
-          name: p.name,
-          description: p.description,
-          x: p.x,
-          y: p.y,
-          isYou: p._id === clawdbot.playerId,
-        })),
+        players: (world.players || []).map((p) => {
+          const desc = playerDescMap.get(p.id);
+          return {
+            id: p.id,
+            name: desc?.name ?? 'Unknown',
+            description: desc?.description ?? '',
+            x: p.position?.x ?? 0,
+            y: p.position?.y ?? 0,
+            isYou: p.id === clawdbot.playerId,
+          };
+        }),
         conversations: conversations.map((c) => ({
-          id: c._id,
-          participants: c.participants,
-          isActive: c.isActive,
+          id: c.id,
+          participants: c.participants.map((p) => p.playerId),
+          numMessages: c.numMessages,
         })),
         recentMessages: messages.map((m) => ({
           author: m.author,
@@ -281,7 +285,7 @@ export const promptClawdbot = internalAction({
   },
 });
 
-export const getClawdbotById = query({
+export const getClawdbotById = internalQuery({
   args: { clawdbotId: v.id('clawdbots') },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.clawdbotId);
