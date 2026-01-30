@@ -23,6 +23,7 @@ export default function Game() {
   const [gameWrapperRef, { width, height }] = useElementSize();
 
   const worldStatus = useQuery(api.world.defaultWorldStatus);
+  console.log('worldStatus:', worldStatus);
   const worldId = worldStatus?.worldId;
   const engineId = worldStatus?.engineId;
 
