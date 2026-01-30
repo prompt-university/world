@@ -36,8 +36,14 @@ export default function Game() {
 
   const scrollViewRef = useRef<HTMLDivElement>(null);
 
+  console.log('Game render:', { worldId, engineId, gameLoaded: !!game, width, height });
+  
   if (!worldId || !engineId || !game) {
-    return null;
+    return <div className="text-white p-4 text-center">Loading world... {!worldId && '(no worldId)'} {!engineId && '(no engineId)'} {!game && '(no game)'}</div>;
+  }
+  
+  if (width === 0 || height === 0) {
+    return <div className="text-white p-4 text-center">Waiting for layout...</div>;
   }
   return (
     <>

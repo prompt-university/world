@@ -93,8 +93,11 @@ npx convex dev
 ```bash
 # .env.local
 CONVEX_DEPLOYMENT=your-deployment
+VITE_CONVEX_URL=https://your-deployment.convex.cloud
 OPENAI_API_KEY=sk-...  # Or use Ollama/Together
 ```
+
+**Note:** `CONVEX_DEPLOYMENT` is used by the Convex CLI. For the frontend to connect to Convex, you **must** also set `VITE_CONVEX_URL` with the full deployment URL (e.g., `https://cheerful-wildcat-857.convex.cloud`). The `VITE_` prefix is required for Vite to expose the variable to the browser.
 
 ### Run
 
