@@ -1,0 +1,125 @@
+% NeurIPS 2026 Style File
+% Based on official NeurIPS template
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{neurips_2026}[2026/01/01 NeurIPS 2026 submission/camera-ready style file]
+
+% Options
+\newif\if@neuripsfinal\@neuripsfinalfalse
+\DeclareOption{final}{\@neuripsfinaltrue}
+\newif\if@preprint\@preprintfalse
+\DeclareOption{preprint}{\@preprinttrue}
+\ProcessOptions\relax
+
+% Packages
+\RequirePackage{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{natbib}
+\RequirePackage{times}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% Page layout
+\geometry{
+  papersize={8.5in,11in},
+  textheight=9in,
+  textwidth=5.5in,
+  top=1in,
+  headheight=12pt,
+  headsep=25pt,
+  footskip=30pt
+}
+
+% Line spacing
+\renewcommand{\baselinestretch}{1.0}
+
+% Fonts
+\renewcommand{\rmdefault}{ptm}
+\renewcommand{\sfdefault}{phv}
+
+% Section formatting
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+  {-2.5ex \@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus.2ex}%
+  {\normalfont\large\bfseries}}
+
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+  {-2.0ex\@plus -1ex \@minus -.2ex}%
+  {1.0ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+  {-1.5ex\@plus -1ex \@minus -.2ex}%
+  {0.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+
+% Abstract
+\renewenvironment{abstract}%
+  {\centerline{\large\bfseries Abstract}%
+   \vspace{0.5ex}%
+   \begin{quote}}%
+  {\par\end{quote}\vskip 1ex}
+
+% Title
+\def\@maketitle{%
+  \vbox to 2.25in{%
+    \vspace*{\fill}
+    \vskip 2em%
+    \begin{center}%
+      {\LARGE\bfseries \@title \par}%
+      \vskip 1.5em%
+      {\large
+        \lineskip .5em%
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+    \end{center}%
+    \par
+    \vspace*{\fill}
+  }%
+}
+
+% Headers
+\if@neuripsfinal
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[C]{NeurIPS 2026}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+\else
+  \pagestyle{plain}
+\fi
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5.5pt plus 1pt minus 1pt}
+
+% Float parameters
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.8}
+
+% Caption formatting
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{{\bfseries #1:} #2}%
+  \ifdim \wd\@tempboxa >\hsize
+    {\bfseries #1:} #2\par
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+% Acknowledgments (only in final)
+\newenvironment{acknowledgments}%
+  {\if@neuripsfinal
+     \section*{Acknowledgments}
+   \else
+     \section*{Acknowledgments (Hidden for Review)}
+     \begin{comment}
+   \fi}%
+  {\if@neuripsfinal\else\end{comment}\fi}
+
+\endinput
